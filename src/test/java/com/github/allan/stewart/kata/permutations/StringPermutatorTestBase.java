@@ -39,4 +39,27 @@ public class StringPermutatorTestBase {
                                  "odgs\nodsg\nogds\nogsd\nosdg\nosgd\n" +
                                  "sdgo\nsdog\nsgdo\nsgod\nsodg\nsogd\n");
     }
+
+    @Test
+    public void speedTest() {
+        String input = "alphabetical";
+        long duration = 0;
+        long start = 0;
+        long end = 0;
+        long threshold = 1000;
+        NoOpPermutationHandler handler = new NoOpPermutationHandler();
+
+        for (int length = 5; length <= 12; length++) {
+            start = System.currentTimeMillis();
+            permutator.getPermutations(input.substring(0, length), handler);
+            end = System.currentTimeMillis();
+            duration = end-start;
+
+            System.out.println(permutator.getClass().getCanonicalName() + ' ' + length + "!: " + duration + "ms.");
+
+            if (duration >= threshold) {
+                return;
+            }
+        }
+    }
 }
