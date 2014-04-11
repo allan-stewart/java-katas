@@ -48,6 +48,7 @@ public class StringPermutatorTestBase {
         long end = 0;
         long threshold = 1000;
         NoOpPermutationHandler handler = new NoOpPermutationHandler();
+        String name = permutator.getClass().getSimpleName() + ' ';
 
         for (int length = 5; length <= 12; length++) {
             start = System.currentTimeMillis();
@@ -55,7 +56,7 @@ public class StringPermutatorTestBase {
             end = System.currentTimeMillis();
             duration = end-start;
 
-            System.out.println(permutator.getClass().getCanonicalName() + ' ' + length + "!: " + duration + "ms.");
+            System.out.println(name + length + "! = " + duration + "ms.");
 
             if (duration >= threshold) {
                 return;
