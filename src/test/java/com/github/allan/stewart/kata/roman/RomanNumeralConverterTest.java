@@ -6,7 +6,7 @@ import org.junit.Test;
 public class RomanNumeralConverterTest {
 
     @Test
-    public void primary_numerals() {
+    public void intToRoman_primaryNumerals() {
         Assert.assertEquals("I", RomanNumeralConverter.intToRoman(1));
         Assert.assertEquals("V", RomanNumeralConverter.intToRoman(5));
         Assert.assertEquals("X", RomanNumeralConverter.intToRoman(10));
@@ -17,7 +17,7 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void additive() {
+    public void intToRoman_additive() {
         Assert.assertEquals("II", RomanNumeralConverter.intToRoman(2));
         Assert.assertEquals("III", RomanNumeralConverter.intToRoman(3));
         Assert.assertEquals("XX", RomanNumeralConverter.intToRoman(20));
@@ -29,7 +29,7 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void subtractive() {
+    public void intToRoman_subtractive() {
         Assert.assertEquals("IV", RomanNumeralConverter.intToRoman(4));
         Assert.assertEquals("IX", RomanNumeralConverter.intToRoman(9));
         Assert.assertEquals("XL", RomanNumeralConverter.intToRoman(40));
@@ -39,7 +39,7 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void combinations() {
+    public void intToRoman_combinations() {
         Assert.assertEquals("MMXIV", RomanNumeralConverter.intToRoman(2014));
         Assert.assertEquals("MMDCCCLXXVII", RomanNumeralConverter.intToRoman(2877));
     }
