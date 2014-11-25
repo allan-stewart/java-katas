@@ -1,76 +1,70 @@
 package com.github.allan.stewart.kata.roman;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class RomanNumeralConverter {
-    private static final Map<Integer, String> map;
-    private static final Map<String, Integer> mapToInt;
+    private static final ArrayList<Numeral> numerals;
     static {
-        map = new LinkedHashMap<Integer, String>();
-        map.put(1000, "M");
-        map.put(900, "CM");
-        map.put(500, "D");
-        map.put(400, "CD");
-        map.put(100, "C");
-        map.put(90, "XC");
-        map.put(50, "L");
-        map.put(40, "XL");
-        map.put(10, "X");
-        map.put(9, "IX");
-        map.put(5, "V");
-        map.put(4, "IV");
-        map.put(1, "I");
-
-        mapToInt = new LinkedHashMap<String, Integer>();
-        mapToInt.put("M", 1000);
-        mapToInt.put("CM", 900);
-        mapToInt.put("D", 500);
-        mapToInt.put("CD", 400);
-        mapToInt.put("C", 100);
-        mapToInt.put("XC", 90);
-        mapToInt.put("L", 50);
-        mapToInt.put("XL", 40);
-        mapToInt.put("X", 10);
-        mapToInt.put("IX", 9);
-        mapToInt.put("V", 5);
-        mapToInt.put("IV", 4);
-        mapToInt.put("I", 1);
+        numerals = new ArrayList<Numeral>();
+        numerals.add(new Numeral("M", 1000));
+        numerals.add(new Numeral("CM", 900));
+        numerals.add(new Numeral("D", 500));
+        numerals.add(new Numeral("CD", 400));
+        numerals.add(new Numeral("C", 100));
+        numerals.add(new Numeral("XC", 90));
+        numerals.add(new Numeral("L", 50));
+        numerals.add(new Numeral("XL", 40));
+        numerals.add(new Numeral("X", 10));
+        numerals.add(new Numeral("IX", 9));
+        numerals.add(new Numeral("V", 5));
+        numerals.add(new Numeral("IV", 4));
+        numerals.add(new Numeral("I", 1));
     }
 
     public static String intToRoman(int input) {
         int remaining = input;
         StringBuilder output = new StringBuilder();
-        Iterator iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, String> numeral = (Map.Entry)iterator.next();
-            while (remaining >= numeral.getKey()) {
-                output.append(numeral.getValue());
-                remaining -= numeral.getKey();
+        for (Numeral numeral : numerals) {
+            while (remaining >= numeral.getValue()) {
+                output.append(numeral.getSymbol());
+                remaining -= numeral.getValue();
             }
         }
-
         return output.toString();
     }
 
     public static int romanToInt(String input) {
         int value = 0;
         int index = 0;
-
-        Iterator iterator = mapToInt.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, Integer> numeral = (Map.Entry)iterator.next();
-            while (getSubstring(input, index, numeral).equals(numeral.getKey())) {
+        for (Numeral numeral : numerals) {
+            while (getSubstring(input, index, numeral).equals(numeral.getSymbol())) {
                 value += numeral.getValue();
-                index += numeral.getKey().length();
+                index += numeral.getSymbol().length();
             }
         }
-
         return value;
     }
 
-    private static String getSubstring(String input, int startIndex, Map.Entry<String, Integer> numeral) {
-        return input.substring(startIndex, Math.min(startIndex + numeral.getKey().length(), input.length()));
+    private static String getSubstring(String input, int startIndex, Numeral numeral) {
+        return input.substring(startIndex, Math.min(startIndex + numeral.getSymbol().length(), input.length()));
+    }
+
+
+    private static class Numeral {
+        private String symbol;
+        private int value;
+
+        public Numeral(String symbol, int value) {
+            this.symbol = symbol;
+            this.value = value;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }
