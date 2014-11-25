@@ -46,7 +46,7 @@ public class StringPermutatorTestBase {
         long duration = 0;
         long start = 0;
         long end = 0;
-        long threshold = 1000;
+        long threshold = 100;
         NoOpPermutationHandler handler = new NoOpPermutationHandler();
         String name = permutator.getClass().getSimpleName() + ' ';
 
